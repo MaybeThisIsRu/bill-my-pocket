@@ -28,3 +28,6 @@ Let's be responsible, and let's reward these businesses/companies/brands by usin
 * ISO compliant currency
 * A way to document services that no longer offer local pricing
 * Hero illustration - light/dark mode friendly
+* Mobile friendly tables
+* Favicon
+* content-description for each page
