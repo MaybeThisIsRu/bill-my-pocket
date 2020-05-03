@@ -1,0 +1,58 @@
+[
+	{
+		"name": "Spotify",
+		"summary": "Music streaming; additionally offers podcasts.",
+		"url": "https://spotify.com",
+		"platforms": ["android"],
+		"lastUpdated": "2020-05-03",
+		"priceStructure": {
+			"base": {
+				"country": "Sweden",
+				"currency": "kr",
+				"price": {
+					"monthly": "99,00",
+					"annual": ""
+				}
+			},
+			"regional": [
+				{
+					"country": "India",
+					"currency": "₹",
+					"price": {
+						"monthly": "119",
+						"annual": "1189",
+						"platform": "Official Website"
+					}
+				}
+			]
+		}
+	},
+	{
+		"name": "Netflix",
+		"summary": "Catalogue of movies, TV shows, documentaries, including sizeable original content.",
+		"url": "https://netflix.com",
+		"platforms": ["android", "web", "ios"],
+		"lastUpdated": "2020-05-03",
+		"priceStructure": {
+			"base": {
+				"country": "USA",
+				"currency": "$",
+				"price": {
+					"monthly": "7.99",
+					"annual": "NA"
+				}
+			},
+			"regional": [
+				{
+					"country": "India",
+					"currency": "₹",
+					"price": {
+						"monthly": "500",
+						"annual": "NA",
+						"platform": "Official Website"
+					}
+				}
+			]
+		}
+	}
+]

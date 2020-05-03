@@ -1,32 +1,11 @@
 {
-    "title": "Quick-start kit for eleventy",
-    "subtitle": "eleventy v0.10 with defaults",
+    "title": "Bill My Pocket",
+    "subtitle": "List of subscriptions that are globally budget friendly, thanks to regional pricing. Bill my pocket, please! 😉",
     "authors": {
         "owner": {
-            "name": "Jane Doe",
-            "slug": "jane-doe",
-            "website": "/",
-            "socials": {
-                "email": "",
-                "linkedin": "",
-                "facebook": "",
-                "twitter": "",
-                "instagram": ""
-            }
-        },
-        "guests": [
-            {
-                "name": "John",
-                "slug": "john",
-                "website": "/",
-                "socials": {
-                    "email": "",
-                    "linkedin": "",
-                    "facebook": "",
-                    "twitter": "",
-                    "instagram": ""
-                }
-            }
-        ]
+            "name": "Ru Singh",
+            "slug": "ru-singh",
+            "website": "https://rusingh.com"
+        }
     }
 }

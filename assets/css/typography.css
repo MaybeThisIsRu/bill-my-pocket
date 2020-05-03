@@ -1,7 +1,8 @@
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-	@apply font-medium;
-	@apply leading-tight;
-	@apply text-gray-700;
+	@apply font-bold;
+  @apply leading-tight;
+  @apply tracking-tight;
+	@apply text-gray-800;
 	@apply mt-4 mb-1;
 
 	@screen lg {
@@ -139,18 +140,16 @@ ul {
 
 
 a {
-	@apply text-green-700;
+  @apply text-orange-600;
+  @apply font-bold;
+  @apply underline;
 
 	@screen dm {
-		@apply text-green-500;
+		@apply text-orange-400;
 	}
 
 	&:focus {
 		@apply shadow-outline;
-	}
-
-	&:hover {
-		@apply underline;
 	}
 }
 
@@ -200,4 +199,20 @@ img {
 		}
 	}
 	
+}
+
+.price-table {
+  @apply w-full;
+
+  & thead {
+    @apply bg-orange-500;
+    
+    @screen dm {
+      @apply bg-orange-700;
+    }
+  }
+
+  & td:not(:nth-of-type(1)) {
+    @apply text-center;
+  }
 }

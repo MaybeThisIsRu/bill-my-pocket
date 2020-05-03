@@ -1,0 +1,33 @@
+<article class="my-4 lg:my-6 py-6 px-8 rounded-lg bg-gray-100 dm:bg-gray-900 shadow">
+    <h3 class="mt-0 lg:mt-0 text-orange-600 dm:text-orange-400">{{ service.name }}</h3>
+    <a href="{{ service.url }}">Website</a>
+    <p class="text-sm">Last updated on {{ service.lastUpdated | friendlyDate }}</p>
+    <p>{{ service.summary }}</p>
+
+    <table class="price-table">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Price (monthly)</th>
+                <th>Price (annual)</th>
+                <th>Available Through</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{service.priceStructure.base.country}} ({{service.priceStructure.base.currency}})</td>
+                <td>{{service.priceStructure.base.price.monthly}}</td>
+                <td>{{service.priceStructure.base.price.annual}}</td>
+                <td></td>
+            </tr>
+            {% for priceObj in service.priceStructure.regional %}
+                <tr>
+                    <td>{{priceObj.country}} ({{priceObj.currency}})</td>
+                    <td>{{priceObj.price.monthly}}</td>
+                    <td>{{priceObj.price.annual}}</td>
+                    <td>{{priceObj.price.platform}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</article>

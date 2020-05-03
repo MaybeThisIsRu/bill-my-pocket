@@ -1,0 +1,19 @@
+---
+layout: default
+pagination:
+  data: services
+  size: 1
+  alias: service
+permalink: "/subscriptions/{{ service | slug }}/"
+content-description: ""
+---
+
+<section>
+	<main>
+		<ul class="list-none">
+			{% for item in services[service] %}
+    			{% include service-card service:item %}
+			{% endfor %}
+		</ul>
+	</main>
+</section>
