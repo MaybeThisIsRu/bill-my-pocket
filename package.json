@@ -1,17 +1,17 @@
 {
-  "name": "smix-eleventy-starter",
-  "version": "0.0.2",
-  "description": "A gulp-based starter for Static Site Generators, preconfigured for @11ty/eleventy",
+  "name": "bill-my-pocket",
+  "version": "0.0.1",
+  "description": "List of subscriptions that are globally budget friendly, thanks to regional pricing.",
   "main": "",
   "scripts": {
-		"dev": "gulp develop",
-		"staging": "gulp staging",
+    "dev": "gulp develop",
+    "staging": "gulp staging",
     "prod": "gulp production",
     "force-prod": "NODE_ENV=production gulp production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ru Singh <hello@rusingh.com>",
-  "license": "GNU GPLv3",
+  "license": "GNU AGPLv3",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/browser-sync": "^2.26.1",
