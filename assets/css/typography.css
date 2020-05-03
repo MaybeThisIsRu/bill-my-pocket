@@ -86,7 +86,11 @@ li {
 
 ol {
 	@apply list-decimal;
-	@apply list-outside;
+  @apply list-inside;
+  
+  @screen lg {
+    @apply list-outside;
+  }
 
 	& ol {
 		@apply list-decimal;
@@ -113,7 +117,11 @@ ol {
 
 ul {
 	@apply list-disc;
-	@apply list-outside;
+  @apply list-inside;
+  
+  @screen lg {
+    @apply list-outside;
+  }
 
 	& ul {
 		@apply list-disc;
@@ -140,12 +148,12 @@ ul {
 
 
 a {
-  @apply text-orange-600;
+  @apply text-indigo-600;
   @apply font-bold;
   @apply underline;
 
 	@screen dm {
-		@apply text-orange-400;
+		@apply text-indigo-400;
 	}
 
 	&:focus {
@@ -205,10 +213,10 @@ img {
   @apply w-full;
 
   & thead {
-    @apply bg-orange-500;
+    @apply bg-indigo-200;
     
     @screen dm {
-      @apply bg-orange-700;
+      @apply bg-indigo-700;
     }
   }
 
