@@ -4,7 +4,7 @@ title: "Home"
 ---
 
 <!-- TODO Work out a light/dark mode friendly illustration/hero design -->
-<div class="mb-2 lg:mb-4 bg-white dm:hidden h-64 rounded-lg shadow-sm">
+<div class="mb-2 lg:mb-4 dm:hidden h-64 rounded-lg shadow-sm">
     <img class="h-full w-auto block mx-auto" src="/assets/img/sprinting.png" />
 </div>
 
@@ -12,7 +12,7 @@ I made this directory to improve discovery of services that offer a price keepin
 
 This website along with its data is [open-source](https://github.com/hirusi/bill-my-pocket). I welcome contributions - please open a pull request on the repository and I will take a look as soon as I can.
 
-### Some guidelines
+### Guidelines
 
 * The base country would be one where the company of the service is headquartered.
 * Please use the currency symbol directly for now. You can help me figure out a way to translate three-letter currency codes to their respective symbols by creating a pull request.
