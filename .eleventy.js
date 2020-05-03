@@ -9,16 +9,6 @@ module.exports = function(config) {
 	// Additional files to watch for changes
 	config.addWatchTarget("./ssg/");
 
-	// *** Forestry CMS Config
-	// Run serve on 0.0.0.0 on staging
-	if (process.env.ELEVENTY_ENV == "staging") {
-		config.setBrowserSyncConfig({
-			host: "0.0.0.0"
-		});
-	}
-	// Copy as-is from root to output path
-	config.addPassthroughCopy("admin");
-
 	// *** Plugins
 	// Nothing here right now.
 
