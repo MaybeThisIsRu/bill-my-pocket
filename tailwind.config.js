@@ -11,6 +11,10 @@ module.exports = {
       }
     },
     fontFamily: {
+	  serif: [
+		  'Bitter',
+		  'serif'
+	  ],
       sans: [
         '-apple-system',
         'BlinkMacSystemFont',
