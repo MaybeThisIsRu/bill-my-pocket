@@ -19,15 +19,20 @@ This website along with its data is [open-source](https://github.com/hirusi/bill
 
 I am not responsible for any misuse. I encourage everyone to pay in their local currency.
 
-Businesses have a fine line to keep between profits and regional accessibility. Persistent misuse could lead businesses to withdraw local pricing purely for reasons of sustainability.I do not want that, and I hope you don't either.
+Businesses have a fine line to keep between profits and regional accessibility. Persistent misuse could lead businesses to withdraw local pricing purely for reasons of sustainability.
 
 Let's be responsible, and let's reward these businesses/companies/brands by using them over competitors who do not have a local pricing, whenever possible. Let's show them it works! 🙂
 
 ## To-Do
 
-* ISO compliant currency
 * A way to document services that no longer offer local pricing
-* Hero illustration - light/dark mode friendly
+* Better landing page
+  * Hero illustration - light/dark mode friendly
 * Mobile friendly tables
-* Favicon
-* content-description for each page
+* Logo + favicon
+* SEO: `content-description` for each page
+* API
+* Rewriting data generation script
+  * ...to be more maintainable; consider if any architecture/design fits better
+  * Optionally switch to TypeScript
+  * Cache data to reduce API calls and build times
