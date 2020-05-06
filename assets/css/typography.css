@@ -213,14 +213,28 @@ img {
   @apply w-full;
 
   & thead {
-    @apply bg-gray-200;
+    @apply bg-gray-300;
     
     @screen dm {
       @apply bg-gray-900;
     }
   }
 
+  & tbody {
+    & tr:first-of-type {
+      @apply bg-gray-200;
+
+      @screen dm {
+        @apply bg-gray-700;
+      }
+    }
+  }
+
   & td:not(:nth-of-type(1)) {
     @apply text-center;
+  }
+
+  & th, & td {
+    @apply py-1 px-2;
   }
 }

@@ -5,10 +5,6 @@
         {{ service.lastUpdated | friendlyDate }}</p>
     <p>{{ service.summary }}</p>
 
-    {% if service.basePrice.countryAlpha2 != "US" %}
-        <p class="text-xs text-gray-600 dm:text-gray-500">The base country for this subscription is not the USA. Due to some limitations, we first calculate how much it <i>should</i> cost in the US based on the price set in the base country, and then peg <i>that</i> against the prices in other countries. That is, all the fair price values for countries below, except the US if included, are just an approximation.</p>
-    {% endif %}
-
     <table class="price-table">
         <thead>
             <tr>
@@ -16,7 +12,7 @@
                 <th>Price/mo</th>
                 <th>Price/yr</th>
                 <th>
-                    <span class="border-b border-dotted hover:cursor-help" title="A fair price is one that's at least as low as equivalent PPP price. We compare the monthly prices to arrive at the fair price verdict.">Fair Price?</span>
+                    <span class="border-b border-dotted border-gray-700 dm:border-gray-300 hover:cursor-help" title="A fair price is one that's at least as low as equivalent PPP price. We compare the monthly prices to arrive at the fair price verdict.">Fair Price?</span>
                 </th>
                 <th>Available</th>
             </tr>
