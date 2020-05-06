@@ -1,0 +1,25 @@
+[
+	{
+		"name": "Todoist",
+		"summary": "A powerful to-do list app that works across all platforms and offers several integrations.",
+		"url": "https://todoist.com/",
+		"lastUpdated": "2020-05-06",
+		"basePrice": {
+			"countryAlpha2": "US",
+			"amount": {
+				"monthly": 3,
+				"annual": 36
+			}
+		},
+		"regionPrices": [
+			{
+				"countryAlpha2": "IN",
+				"amount": {
+					"monthly": 339,
+					"annual": 3108,
+					"platform": "Google Play Store"
+				}
+			}
+		]
+	}
+]

@@ -1,0 +1,25 @@
+[
+	{
+		"name": "Headspace",
+		"summary": "A guided mindfulness meditiation app.",
+		"url": "https://www.headspace.com/",
+		"lastUpdated": "2020-05-03",
+		"basePrice": {
+			"countryAlpha2": "US",
+			"amount": {
+				"monthly": 12.99,
+				"annual": 69.99
+			}
+		},
+		"regionPrices": [
+			{
+				"countryAlpha2": "IN",
+				"amount": {
+					"monthly": 120,
+					"annual": 890,
+					"platform": "Google Play Store"
+				}
+			}
+		]
+	}
+]

@@ -16,7 +16,8 @@ module.exports = function(config) {
 	// Jekyll replacement for post_url tag as an 11ty shortcode
 	config.addShortcode("getUrl", shortcodes.postUrl);
 	config.addShortcode("isOldPost", shortcodes.isOldPost);
-
+	config.addShortcode("getAlleppRate", shortcodes.getAlleppRate);
+	
 	// *** Filters
 	// Dates
 	config.addFilter("friendlyDate", filters.friendlyDate);

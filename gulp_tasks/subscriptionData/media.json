@@ -1,0 +1,64 @@
+[
+	{
+		"name": "Spotify",
+		"summary": "Music streaming; additionally offers podcasts.",
+		"url": "https://spotify.com",
+		"lastUpdated": "2020-05-05",
+		"basePrice": {
+			"countryAlpha2": "SE",
+			"amount": {
+				"monthly": 9.99,
+				"annual": null
+			}
+		},
+		"regionPrices": [
+			{
+				"countryAlpha2": "IN",
+				"amount": {
+					"monthly": 119,
+					"annual": 1189,
+					"platform": "Official Website"
+				}
+			},
+			{
+				"countryAlpha2": "US",
+				"amount": {
+					"monthly": 9.99,
+					"annual": null,
+					"platform": "Official Website"
+				}
+			},
+			{
+				"countryAlpha2": "GB",
+				"amount": {
+					"monthly": 9.99,
+					"annual": null,
+					"platform": "Official Website"
+				}
+			}
+		]
+	},
+	{
+		"name": "Netflix",
+		"summary": "Catalogue of movies, TV shows, documentaries, including sizeable original content.",
+		"url": "https://netflix.com",
+		"lastUpdated": "2020-05-03",
+		"basePrice": {
+			"countryAlpha2": "US",
+			"amount": {
+				"monthly": 7.99,
+				"annual": null
+			}
+		},
+		"regionPrices": [
+			{
+				"countryAlpha2": "IN",
+				"amount": {
+					"monthly": 500,
+					"annual": null,
+					"platform": "Official Website"
+				}
+			}
+		]
+	}
+]

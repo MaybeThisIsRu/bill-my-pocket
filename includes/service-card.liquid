@@ -1,33 +1,75 @@
-<article class="my-4 lg:my-6 py-6 px-8 rounded-lg bg-gray-100 dm:bg-gray-800 shadow-md">
-    <h3 class="mt-0 lg:mt-0 text-indigo-600 dm:text-indigo-400">{{ service.name }}</h3>
+<article class="my-4 lg:my-6 py-6 px-8 rounded-lg bg-white dm:bg-gray-800 shadow-md">
+    <h3 class="mt-0 lg:mt-0">{{ service.name }}</h3>
     <a href="{{ service.url }}">Website</a>
-    <p class="text-sm">Last updated on {{ service.lastUpdated | friendlyDate }}</p>
+    <p class="text-sm">Last updated on
+        {{ service.lastUpdated | friendlyDate }}</p>
     <p>{{ service.summary }}</p>
+
+    {% if service.basePrice.countryAlpha2 != "US" %}
+        <p class="text-xs text-gray-600 dm:text-gray-500">The base country for this subscription is not the USA. Due to some limitations, we first calculate how much it <i>should</i> cost in the US based on the price set in the base country, and then peg <i>that</i> against the prices in other countries. That is, all the fair price values for countries below, except the US if included, are just an approximation.</p>
+    {% endif %}
 
     <table class="price-table">
         <thead>
             <tr>
                 <th>Country</th>
-                <th>Price (monthly)</th>
-                <th>Price (annual)</th>
-                <th>Available Through</th>
+                <th>Price/mo</th>
+                <th>Price/yr</th>
+                <th>
+                    <span class="border-b border-dotted hover:cursor-help" title="A fair price is one that's at least as low as equivalent PPP price. We compare the monthly prices to arrive at the fair price verdict.">Fair Price?</span>
+                </th>
+                <th>Available</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{service.priceStructure.base.country}} ({{service.priceStructure.base.currency}})</td>
-                <td>{{service.priceStructure.base.price.monthly}}</td>
-                <td>{{service.priceStructure.base.price.annual}}</td>
-                <td></td>
+                <td>{{service.basePrice.countryEmoji}} {{service.basePrice.countryName}}</td>
+                <td>
+                    {% if service.basePrice.amount.monthly %}
+                    {{service.basePrice.currency.symbol.template | replace: '$', service.basePrice.currency.symbol.grapheme | replace: '1', service.basePrice.amount.monthly }}
+                    {% else %}
+                        -
+                        {% endif %}
+                </td>
+                <td>
+                    {% if service.basePrice.amount.annual %}
+                        {{service.basePrice.currency.symbol.template | replace: '$', service.basePrice.currency.symbol.grapheme | replace: '1', service.basePrice.amount.annual }}
+                    {% else %}
+                        -
+                        {% endif %}
+                </td>
+                <td>-</td>
+                <td>-</td>
             </tr>
-            {% for priceObj in service.priceStructure.regional %}
-                <tr>
-                    <td>{{priceObj.country}} ({{priceObj.currency}})</td>
-                    <td>{{priceObj.price.monthly}}</td>
-                    <td>{{priceObj.price.annual}}</td>
-                    <td>{{priceObj.price.platform}}</td>
-                </tr>
-            {% endfor %}
+            {% for regionPrice in service.regionPrices %}
+                        <tr>
+                            <td>{{regionPrice.countryEmoji}} {{regionPrice.countryName}}</td>
+                            <td>
+                                {% if regionPrice.amount.monthly %}
+                                    {{regionPrice.currency.symbol.template | replace: '$', regionPrice.currency.symbol.grapheme | replace: '1', regionPrice.amount.monthly }}
+                                {% else %}
+                                    NA
+                                    {% endif %}
+                            </td>
+                            <td>{% if regionPrice.amount.annual %}
+                                    {{regionPrice.currency.symbol.template | replace: '$', regionPrice.currency.symbol.grapheme | replace: '1', regionPrice.amount.annual }}
+                                {% else %}
+                                    -
+                                    {% endif %}
+                                    </td>
+                            <td>
+                                {% if regionPrice.discountedAmount.monthly and regionPrice.amount.monthly %}
+                                    {% capture alleppRate %}{% getAlleppRate regionPrice.amount.monthly, regionPrice.discountedAmount.monthly %}{% endcapture %}
+                                    {{ alleppRate }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td>{{regionPrice.amount.platform}}</td>
+                        </tr>
+                    {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 </article>
