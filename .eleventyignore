@@ -12,4 +12,5 @@ LICENSE
 .editorconfig
 .babelrc
 .prettierrc
+data_src
 !data/services

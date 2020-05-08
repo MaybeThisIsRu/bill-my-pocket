@@ -7,7 +7,7 @@ import { img, imgWatcher } from "./gulp_tasks/img.babel";
 import { font, fontWatcher } from "./gulp_tasks/font.babel";
 import { html } from "./gulp_tasks/html.babel";
 import { eleventyBuild, eleventyWatch } from "./gulp_tasks/ssg.babel";
-import subscriptionData from "./gulp_tasks/subscriptionData/index.babel";
+import subscriptionData from "./gulp_tasks/subscriptionData.babel";
 
 // Public Tasks
 const production = series(

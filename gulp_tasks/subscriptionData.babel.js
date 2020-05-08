@@ -5,8 +5,8 @@ const fs = require("fs");
 const path = require("path");
 
 const PPP_API = "https://api.purchasing-power-parity.com";
-const DATA_SRC_DIR = path.resolve(__dirname, ".");
-const DATA_DEST_DIR = path.resolve(__dirname, "../../data/services/");
+const DATA_SRC_DIR = path.resolve(__dirname, "../data_src/");
+const DATA_DEST_DIR = path.resolve(__dirname, "../data/services/");
 const SUBSCRIPTION_CATEGORIES = [];
 
 // TODO Cache as much data as possible by timestamps, check exists and stale before making fresh API calls
@@ -145,34 +145,40 @@ const setIntermediatePrice = ({ sub, subscriptions }) => {
 
 		fetchPPPDetails(sub.basePrice.countryAlpha2)
 			.then(response => {
-				if (response.ppp) {
-					log("Intermediate Price response received");
-					if (sub.basePrice.amount.monthly) {
-						idealMonthlyPriceInUS = +(
-							(sub.basePrice.amount.monthly *
-								response.ppp.currencyMain.exchangeRate) /
-							response.ppp.ppp
-						).toFixed(2);
+				try {
+					if (response.ppp) {
+						log("Intermediate Price response received");
+						if (sub.basePrice.amount.monthly) {
+							idealMonthlyPriceInUS = +(
+								(sub.basePrice.amount.monthly *
+									response.ppp.currencyMain.exchangeRate) /
+								response.ppp.ppp
+							).toFixed(2);
+						}
+
+						if (sub.basePrice.amount.annual) {
+							idealAnnualPriceInUS = +(
+								(sub.basePrice.amount.annual *
+									response.ppp.currencyMain.exchangeRate) /
+								response.ppp.ppp
+							).toFixed(2);
+						}
+
+						setIntermediatePriceInSub({
+							idealMonthlyPriceInUS,
+							idealAnnualPriceInUS,
+							subscriptionName: sub.name,
+							subscriptions
+						});
+
+						resolve();
+					} else {
+						throw Error(
+							"API response for intermediary price does not have the ppp object"
+						);
 					}
-
-					if (sub.basePrice.amount.annual) {
-						idealAnnualPriceInUS = +(
-							(sub.basePrice.amount.annual *
-								response.ppp.currencyMain.exchangeRate) /
-							response.ppp.ppp
-						).toFixed(2);
-					}
-
-					setIntermediatePriceInSub({
-						idealMonthlyPriceInUS,
-						idealAnnualPriceInUS,
-						subscriptionName: sub.name,
-						subscriptions
-					});
-
-					resolve();
-				} else {
-					throw Error("");
+				} catch (e) {
+					log.error(e);
 				}
 			})
 			.catch(error => {
@@ -244,72 +250,78 @@ const setter = ({ region, sub, subscriptions, countriesList }) => {
 	return new Promise((resolve, reject) => {
 		fetchPPPDetails(region.countryAlpha2)
 			.then(response => {
-				if (response.ppp) {
-					let discountedMonthlyPrice, discountedAnnualPrice;
-					// Calculate region discounted price against intermediary price - month
-					if (sub.intermediaryPrice) {
-						log("Intermediary price found - month");
-						discountedMonthlyPrice = +getDiscountedPrice({
-							factor: response.ppp.pppConversionFactor,
-							exchangeRate:
-								response.ppp.currencyMain.exchangeRate,
-							price: sub.intermediaryPrice.amount.idealMonthly
-						}).toFixed(2);
-					} else {
-						log("Base price found - month");
-						if (sub.basePrice.amount.monthly) {
+				try {
+					if (response.ppp) {
+						let discountedMonthlyPrice, discountedAnnualPrice;
+						// Calculate region discounted price against intermediary price - month
+						if (sub.intermediaryPrice) {
+							log("Intermediary price found - month");
 							discountedMonthlyPrice = +getDiscountedPrice({
 								factor: response.ppp.pppConversionFactor,
 								exchangeRate:
 									response.ppp.currencyMain.exchangeRate,
-								price: sub.basePrice.amount.monthly
+								price: sub.intermediaryPrice.amount.idealMonthly
 							}).toFixed(2);
+						} else {
+							log("Base price found - month");
+							if (sub.basePrice.amount.monthly) {
+								discountedMonthlyPrice = +getDiscountedPrice({
+									factor: response.ppp.pppConversionFactor,
+									exchangeRate:
+										response.ppp.currencyMain.exchangeRate,
+									price: sub.basePrice.amount.monthly
+								}).toFixed(2);
+							}
 						}
-					}
 
-					// Calculate region discounted price against intermediary price - annual
-					if (sub.intermediaryPrice) {
-						log("Intermediary price found - annual");
-						discountedAnnualPrice = +getDiscountedPrice({
-							factor: response.ppp.pppConversionFactor,
-							exchangeRate:
-								response.ppp.currencyMain.exchangeRate,
-							price: sub.intermediaryPrice.amount.idealAnnual
-						}).toFixed(2);
-					} else {
-						if (sub.basePrice.amount.annual) {
-							log("Base price found - annual");
+						// Calculate region discounted price against intermediary price - annual
+						if (sub.intermediaryPrice) {
+							log("Intermediary price found - annual");
 							discountedAnnualPrice = +getDiscountedPrice({
 								factor: response.ppp.pppConversionFactor,
 								exchangeRate:
 									response.ppp.currencyMain.exchangeRate,
-								price: sub.basePrice.amount.annual
+								price: sub.intermediaryPrice.amount.idealAnnual
 							}).toFixed(2);
-						}
-					}
-
-					// Set region details - whether discounted amounts are against US or other base country
-					log("Setting region details");
-					setRegionDetails({
-						ids: {
-							name: sub.name,
-							countryAlpha2: region.countryAlpha2
-						},
-						data: {
-							discountedMonthlyPrice,
-							discountedAnnualPrice,
-							currencyMain: {
-								code: response.ppp.currencyMain.code,
-								symbol: response.ppp.currencyMain.symbol
+						} else {
+							if (sub.basePrice.amount.annual) {
+								log("Base price found - annual");
+								discountedAnnualPrice = +getDiscountedPrice({
+									factor: response.ppp.pppConversionFactor,
+									exchangeRate:
+										response.ppp.currencyMain.exchangeRate,
+									price: sub.basePrice.amount.annual
+								}).toFixed(2);
 							}
-						},
-						subscriptions,
-						countriesList
-					});
+						}
 
-					resolve();
-				} else {
-					throw Error(`Invalid response ${response}`);
+						// Set region details - whether discounted amounts are against US or other base country
+						log("Setting region details");
+						setRegionDetails({
+							ids: {
+								name: sub.name,
+								countryAlpha2: region.countryAlpha2
+							},
+							data: {
+								discountedMonthlyPrice,
+								discountedAnnualPrice,
+								currencyMain: {
+									code: response.ppp.currencyMain.code,
+									symbol: response.ppp.currencyMain.symbol
+								}
+							},
+							subscriptions,
+							countriesList
+						});
+
+						resolve();
+					} else {
+						throw Error(
+							`API sent an invalid response while getting regional price data; ${response.message}`
+						);
+					}
+				} catch (e) {
+					log.error(e);
 				}
 			})
 			.catch(e => {
@@ -435,7 +447,7 @@ const main = () => {
 
 			// Once we have the file names, construct data files
 			for (const CATEGORY of SUBSCRIPTION_CATEGORIES) {
-				const srcPath = path.join(__dirname, "/", CATEGORY);
+				const srcPath = path.join(DATA_SRC_DIR, CATEGORY);
 				const subscriptions = require(srcPath);
 				getSubsWithInjectedData(subscriptions, countriesList)
 					.then(data => {
