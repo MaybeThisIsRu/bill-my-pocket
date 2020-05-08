@@ -326,7 +326,7 @@ const getSubsWithInjectedData = (subscriptions, countriesList) => {
 
 	// TODO more effecient way to calculate this count
 	for (const sub of subscriptions) {
-		subCount++
+		subCount++;
 		for (const region of sub.regionPrices) {
 			regionCount++;
 		}
@@ -407,14 +407,11 @@ const getSubsWithInjectedData = (subscriptions, countriesList) => {
 
 const writeToFile = ({ fileName, subscriptions }) => {
 	try {
+		const outputPath = `${DATA_DEST_DIR}/${fileName}`;
 		if (!fs.readdirSync(DATA_DEST_DIR))
 			throw Error("Destination data directory does not exist. Create?");
 
-		// TODO How do we know this writes successfully?
-		fs.writeFileSync(
-			`${DATA_DEST_DIR}/${fileName}`,
-			JSON.stringify(subscriptions)
-		);
+		fs.writeFileSync(outputPath, JSON.stringify(subscriptions));
 	} catch (e) {
 		log.error(e);
 	}
@@ -443,6 +440,14 @@ const main = () => {
 				getSubsWithInjectedData(subscriptions, countriesList)
 					.then(data => {
 						log(`getSubsWithInjectedData finished for ${srcPath}`);
+
+						// Create dest dir if it does not exist
+						if (!fs.existsSync(DATA_DEST_DIR)) {
+							fs.mkdirSync(DATA_DEST_DIR, {
+								recursive: true
+							});
+						}
+
 						writeToFile({
 							fileName: CATEGORY,
 							subscriptions: data
