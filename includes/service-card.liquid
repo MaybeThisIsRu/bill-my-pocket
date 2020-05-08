@@ -35,7 +35,7 @@
                         {% endif %}
                 </td>
                 <td>-</td>
-                <td>-</td>
+                <td>{% if service.basePrice.amount.platform %}{{service.basePrice.amount.platform}}{% else %}-{% endif %}</td>
             </tr>
             {% for regionPrice in service.regionPrices %}
                         <tr>

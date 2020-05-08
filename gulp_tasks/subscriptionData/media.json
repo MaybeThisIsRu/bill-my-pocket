@@ -60,5 +60,29 @@
 				}
 			}
 		]
+	},
+	{
+		"name": "Pocketcasts",
+		"summary": "A beautiful and feature-packed podcast listening app",
+		"url": "https://www.pocketcasts.com/",
+		"lastUpdated": "2020-05-08",
+		"basePrice": {
+			"countryAlpha2": "US",
+			"amount": {
+				"monthly": 0.99,
+				"annual": 10,
+				"platform": "Google Play Store"
+			}
+		},
+		"regionPrices": [
+			{
+				"countryAlpha2": "IN",
+				"amount": {
+					"monthly": 85,
+					"annual": 850,
+					"platform": "Google Play Store"
+				}
+			}
+		]
 	}
 ]
