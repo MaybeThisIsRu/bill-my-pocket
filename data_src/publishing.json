@@ -1,0 +1,25 @@
+[
+	{
+		"name": "WordPress - Personal Plan",
+		"summary": "A very popular and customizable blogging platform that powers a significant chunk of the web. Billed annually.",
+		"url": "https://wordpress.com/",
+		"lastUpdated": "2020-07-13",
+		"basePrice": {
+			"countryAlpha2": "US",
+			"amount": {
+				"monthly": 5,
+				"annual": null
+			}
+		},
+		"regionPrices": [
+			{
+				"countryAlpha2": "IN",
+				"amount": {
+					"monthly": 160,
+					"annual": null,
+					"platform": "Official Wesbite"
+				}
+			}
+		]
+	}
+]
