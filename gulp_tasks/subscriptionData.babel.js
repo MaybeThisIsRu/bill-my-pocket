@@ -3,6 +3,8 @@ const currencyFormat = require("currency-format");
 const log = require("fancy-log");
 const fs = require("fs");
 const path = require("path");
+const { RateLimiter } = require("limiter");
+const limiter = new RateLimiter(1, 2000);
 
 const PPP_API = "https://api.purchasing-power-parity.com";
 const DATA_SRC_DIR = path.resolve(__dirname, "../data_src/");
@@ -235,14 +237,16 @@ const setRegionDetails = ({ ids, data, subscriptions, countriesList }) => {
 
 const fetchPPPDetails = target => {
 	return new Promise((resolve, reject) => {
-		fetch(`${PPP_API}/?target=${target}`)
-			.then(response => response.json())
-			.then(json => {
-				resolve(json);
-			})
-			.catch(error => {
-				reject(error);
-			});
+		limiter.removeTokens(1, (err, remainingRequests) => {
+			fetch(`${PPP_API}/?target=${target}`)
+				.then(response => response.json())
+				.then(json => {
+					resolve(json);
+				})
+				.catch(error => {
+					reject(error);
+				});
+		})
 	});
 };
 

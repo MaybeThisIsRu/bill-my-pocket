@@ -47,6 +47,7 @@
     "gulp-imagemin": "^6.1.0",
     "gulp-postcss": "^8.0.0",
     "gulp-uglify": "^3.0.2",
+    "limiter": "^1.1.5",
     "lodash.merge": "^4.6.2",
     "lodash.setwith": "^4.3.2",
     "node-fetch": "^2.6.0",
