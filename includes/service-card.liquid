@@ -44,7 +44,7 @@
                                 {% if regionPrice.amount.monthly %}
                                     {{regionPrice.currency.symbol.template | replace: '$', regionPrice.currency.symbol.grapheme | replace: '1', regionPrice.amount.monthly }}
                                 {% else %}
-                                    NA
+                                    -
                                     {% endif %}
                             </td>
                             <td>{% if regionPrice.amount.annual %}
