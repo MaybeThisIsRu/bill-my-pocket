@@ -1,0 +1,25 @@
+[
+	{
+		"name": "Polypane - Individual Plan",
+		"summary": "\"The browser for developing responsive & accessible websites.\"",
+		"url": "https://polypane.app/",
+		"lastUpdated": "2021-02-18",
+		"basePrice": {
+			"countryAlpha2": "US",
+			"amount": {
+				"monthly": 11,
+				"annual": 108
+			}
+		},
+		"regionPrices": [
+			{
+				"countryAlpha2": "IN",
+				"amount": {
+					"monthly": 899,
+					"annual": 9651.61,
+					"platform": "Official Website"
+				}
+			}
+		]
+	}
+]
